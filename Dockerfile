@@ -12,9 +12,7 @@ LABEL "com.github.actions.color"="green"
 
 LABEL "maintainer"="Scott Brenner <scott@scottbrenner.me>"
 
-RUN apk update && apk upgrade
-RUN apk add python3
-RUN rm -rf /var/cache/apk/*
+RUN apk --no-cache add python3
 RUN pip3 install cfn-lint
 
 COPY entrypoint.sh /entrypoint.sh
