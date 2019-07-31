@@ -15,7 +15,7 @@ workflow "Lint CloudFormation Templates" {
 
 action "cfn-lint" {
   uses = "scottbrenner/cfn-lint-action@master"
-  args = "**/*.yml"
+  args = "**/*.yaml"
 }
 ```
 
