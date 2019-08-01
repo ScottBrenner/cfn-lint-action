@@ -8,7 +8,6 @@ function setup() {
 }
 
 @test "entrypoint runs successfully" {
-  run ls
   run cfn-lint --help
   echo "$output"
   [ "$status" -eq 0 ]
