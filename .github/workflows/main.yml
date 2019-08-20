@@ -1,0 +1,43 @@
+name: CI
+
+on: [push]
+
+jobs:
+  shell-lint:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Shell lint
+      uses: actions/bin/shellcheck@master
+      with:
+        args: entrypoint.sh
+
+  dockerfile-lint:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Dockerfile lint
+      uses: docker://replicated/dockerfilelint:09a5034
+      with:
+        args: Dockerfile
+
+  test:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Test
+      uses: actions/bin/bats@master
+      with:
+        args: test/*.bats
