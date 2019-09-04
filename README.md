@@ -7,16 +7,24 @@ This Action for [CloudFormation Linter](https://github.com/aws-cloudformation/cf
 An example workflow for testing CloudFormation templates for correct properties and their values - run the `cfn-lint` command with the path to the files you want to test as `args`.
 
 
-```hcl
-workflow "Lint CloudFormation Templates" {
-  on = "push"
-  resolves = ["cfn-lint"]
-}
+```yaml
+name: Lint CloudFormation Templates
 
-action "cfn-lint" {
-  uses = "scottbrenner/cfn-lint-action@master"
-  args = "**/*.yaml"
-}
+on: [push]
+
+jobs:
+  cloudformation-linter:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: puppet-lint
+      uses: scottbrenner/cfn-lint-action@master
+      with:
+        args: **/*.yaml
 ```
 
 See [Basic Usage](https://github.com/aws-cloudformation/cfn-python-lint#basic-usage) for full usage details.
