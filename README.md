@@ -21,7 +21,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-    - name: puppet-lint
+    - name: cfn-lint
       uses: scottbrenner/cfn-lint-action@master
       with:
         args: **/*.yaml
