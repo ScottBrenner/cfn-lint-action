@@ -1,0 +1,9 @@
+name: 'cfn-lint-action'
+author: 'GitHub'
+description: 'GitHub Action for CloudFormation Linter'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'box'
+  color: 'yellow'
