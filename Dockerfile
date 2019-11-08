@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3
 
 LABEL name="cfn-lint-action"
 LABEL version="1.0.0"
