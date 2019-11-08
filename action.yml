@@ -1,5 +1,5 @@
 name: 'cfn-lint-action'
-author: 'GitHub'
+author: 'Scott Brenner <scott@scottbrenner.me>'
 description: 'GitHub Action for CloudFormation Linter'
 runs:
   using: 'docker'
