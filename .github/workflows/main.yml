@@ -3,18 +3,18 @@ name: CI
 on: [push]
 
 jobs:
-  shell-lint:
+#   shell-lint:
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
     
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v1
 
-    - name: Shell lint
-      uses: actions/bin/shellcheck@master
-      with:
-        args: entrypoint.sh
+#     - name: Shell lint
+#       uses: actions/bin/shellcheck@master
+#       with:
+#         args: entrypoint.sh
 
   dockerfile-lint:
 
@@ -29,15 +29,15 @@ jobs:
       with:
         args: Dockerfile
 
-  test:
+#   test:
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
     
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v1
 
-    - name: Test
-      uses: actions/bin/bats@master
-      with:
-        args: test/*.bats
+#     - name: Test
+#       uses: actions/bin/bats@master
+#       with:
+#         args: test/*.bats
