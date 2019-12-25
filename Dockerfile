@@ -15,7 +15,7 @@ LABEL "maintainer"="Scott Brenner <scott@scottbrenner.me>"
 RUN apk --no-cache add python3
 RUN pip3 install cfn-lint
 
-ADD cfn-lint.json /cfn-lint.json
+COPY cfn-lint.json /cfn-lint.json
 COPY entrypoint.sh /entrypoint.sh
 RUN ["chmod", "+x", "/entrypoint.sh"]
 ENTRYPOINT ["/entrypoint.sh"]
