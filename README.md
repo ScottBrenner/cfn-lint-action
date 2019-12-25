@@ -2,6 +2,8 @@
 
 This Action for [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) enables arbitrary actions for interacting with CloudFormation Linter to validate CloudFormation yaml/json templates against the CloudFormation spec and additional checks. Includes checking valid values for resource properties and best practices.
 
+![screenshot](screenshot.png)
+
 ## Usage
 
 An example workflow for testing CloudFormation templates for correct properties and their values - run the `cfn-lint` command with the path to the files you want to test as `args`.
