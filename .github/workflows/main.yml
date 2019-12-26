@@ -36,7 +36,7 @@ jobs:
       - name: Docker run
         run: docker run --entrypoint cfn-lint image -v
 
-  # Push image to GitHub Package Registry.
+  # Push image to Docker Hub.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
     # Ensure test job passes before pushing image.
@@ -52,11 +52,11 @@ jobs:
         run: docker build . --file Dockerfile --tag image
 
       - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u scottbrenner --password-stdin
 
       - name: Push image
         run: |
-          IMAGE_ID=docker.pkg.github.com/scottbrenner/cfn-lint-action/$IMAGE_NAME
+          IMAGE_ID=scottbrenner/cfn-lint-action/$IMAGE_NAME
 
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
