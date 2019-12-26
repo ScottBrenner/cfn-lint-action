@@ -56,7 +56,7 @@ jobs:
 
       - name: Push image
         run: |
-          IMAGE_ID=scottbrenner/cfn-lint-action/$IMAGE_NAME
+          IMAGE_ID=scottbrenner/$IMAGE_NAME
 
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
