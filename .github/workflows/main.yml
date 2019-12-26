@@ -31,7 +31,10 @@ jobs:
           args: Dockerfile
 
       - name: Docker build
-        run: docker build . --file Dockerfile
+        run: docker build . --file Dockerfile --tag image
+
+      - name: Docker run
+        run: docker run --entrypoint cfn-lint image -v
 
   # Push image to GitHub Package Registry.
   # See also https://docs.docker.com/docker-hub/builds/
