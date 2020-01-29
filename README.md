@@ -21,7 +21,7 @@ jobs:
     
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: cfn-lint
       uses: docker://scottbrenner/cfn-lint-action:latest
