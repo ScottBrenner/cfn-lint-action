@@ -15,6 +15,7 @@ LABEL "maintainer"="Scott Brenner <scott@scottbrenner.me>"
 RUN apk --no-cache add python3
 RUN pip3 install cfn-lint
 RUN cfn-lint --update-specs
+RUN cfn-lint --update-iam-policies
 
 COPY cfn-lint.json /cfn-lint.json
 COPY entrypoint.sh /entrypoint.sh
