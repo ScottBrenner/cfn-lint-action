@@ -2,19 +2,9 @@ name: CI
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
-    branches:
-      - master
-
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v*
-
-  # Run tests for any PRs.
-  pull_request:
-
-env:
-  IMAGE_NAME: cfn-lint-action
+    branches:    
+      - master         # Push events on master branch
+  pull_request:        # Run tests for any PRs
 
 jobs:
   # Run tests.
@@ -35,40 +25,3 @@ jobs:
 
       - name: Docker run
         run: docker run --entrypoint cfn-lint image -v
-
-  # Push image to Docker Hub.
-  # See also https://docs.docker.com/docker-hub/builds/
-  push:
-    # Ensure test job passes before pushing image.
-    needs: test
-
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Build image
-        run: docker build . --file Dockerfile --tag image
-
-      - name: Log into registry
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u scottbrenner --password-stdin
-
-      - name: Push image
-        run: |
-          IMAGE_ID=scottbrenner/$IMAGE_NAME
-
-          # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-
-          # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-
-          # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
-
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-
-          docker tag image $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
