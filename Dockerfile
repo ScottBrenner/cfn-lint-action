@@ -1,7 +1,6 @@
 FROM alpine:3
 
 LABEL name="cfn-lint-action"
-LABEL version="1.3.0"
 LABEL repository="https://github.com/ScottBrenner/cfn-lint-action"
 LABEL homepage="https://github.com/ScottBrenner/cfn-lint-action"
 
