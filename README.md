@@ -26,7 +26,7 @@ jobs:
     - name: cfn-lint
       uses: scottbrenner/cfn-lint-action@master
       with:
-        args: **/*.yaml
+        args: "**/*.yaml"
 ```
 
 See [Basic Usage](https://github.com/aws-cloudformation/cfn-python-lint#basic-usage) for full usage details.
