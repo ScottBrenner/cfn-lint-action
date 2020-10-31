@@ -3,6 +3,7 @@ FROM python:3.9.0-alpine
 LABEL name="cfn-lint-action"
 LABEL repository="https://github.com/ScottBrenner/cfn-lint-action"
 LABEL homepage="https://github.com/ScottBrenner/cfn-lint-action"
+LABEL org.opencontainers.image.source https://github.com/ScottBrenner/cfn-lint-action
 
 LABEL "com.github.actions.name"="cfn-lint-action"
 LABEL "com.github.actions.description"="GitHub Action for CloudFormation Linter"
