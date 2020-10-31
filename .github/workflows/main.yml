@@ -7,7 +7,6 @@ on:
   pull_request:        # Run tests for any PRs
 
 env:
-  # TODO: Change variable to your image's name.
   IMAGE_NAME: cfn-lint-action
 
 jobs:
@@ -64,7 +63,7 @@ jobs:
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
       - name: Log into GitHub Container Registry
-        run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.CFN_CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push image to GitHub Container Registry
         run: |
