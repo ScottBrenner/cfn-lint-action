@@ -24,7 +24,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: cfn-lint
-      uses: scottbrenner/cfn-lint-action@master
+      uses: docker://ghcr.io/scottbrenner/cfn-lint-action:master
       with:
         args: "**/*.yaml"
 ```
