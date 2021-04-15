@@ -115,6 +115,7 @@ async function installCLI(python, version) {
 
   // Update to the latest linting specs
   await exec.exec(pythonPath, [
+    "-m",
     "echo",
     "$PATH",
   ]);
