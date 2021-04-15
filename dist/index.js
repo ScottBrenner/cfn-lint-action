@@ -110,14 +110,13 @@ async function installCLI(python, version) {
   // Symlink from separate directory so only CFN LINT CLI is added to PATH
   const symlinkPath = path.join(tempPath, "bin");
   fs.mkdirSync(symlinkPath);
-  const cfnLint = isWindows() ? "cfn.exe" : "cfn-lint";
+  const cfnLint = isWindows() ? "cfn-lint.exe" : "cfn-lint";
   fs.symlinkSync(path.join(binPath, cfnLint), path.join(symlinkPath, cfnLint));
 
   // Update to the latest linting specs
-  await exec.exec(pythonPath, [
-    "-m",
-    "echo",
-    "$PATH",
+  await exec.exec(binPath, [
+    "cfn-lint",
+    "--update-specs",
   ]);
 
   return symlinkPath;
