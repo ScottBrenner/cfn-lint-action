@@ -117,8 +117,8 @@ async function installCLI(python, version) {
   return symlinkPath;
 }
 
-async function test(binPath) {
-  console.log(binPath);
+async function test() {
+  await exec.exec('cfn-lint --version')
 }
 
 /**
