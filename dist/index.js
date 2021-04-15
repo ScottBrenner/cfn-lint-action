@@ -65,7 +65,7 @@ async function createPythonVenv(python, venvPath) {
  * @param {string} version - The CFN LINT CLI version to install.
  * @returns {Promise<string>} The directory CFN LINT CLI is installed in.
  */
-async function installCfnLintCli(python, version) {
+async function installCLI(python, version) {
   const tempPath = mkdirTemp();
 
   // Create virtual environment
@@ -100,6 +100,20 @@ async function installCfnLintCli(python, version) {
     `cfn-lint==${version}`,
   ]);
 
+  // Update to the latest linting specs
+  await exec.exec(pythonPath, [
+    "-m",
+    "cfn-lint",
+    "--update-specs",
+  ]);
+
+  // Update the IAM Polices
+  await exec.exec(pythonPath, [
+    "-m",
+    "cfn-lint",
+    "--update-iam-policies",
+  ]);
+
   // Symlink from separate directory so only CFN LINT CLI is added to PATH
   const symlinkPath = path.join(tempPath, "bin");
   fs.mkdirSync(symlinkPath);
@@ -132,7 +146,7 @@ async function setup() {
   const defaultPython = isWindows() ? "python" : "python3";
   const python = getInput("python", /^.+$/, defaultPython);
 
-  const binPath = await installCfnLintCli(python, version);
+  const binPath = await installCLI(python, version);
   core.addPath(binPath);
 }
 
