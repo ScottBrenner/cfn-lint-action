@@ -113,13 +113,12 @@ async function installCLI(python, version) {
   const cfnLint = isWindows() ? "cfn-lint.exe" : "cfn-lint";
   fs.symlinkSync(path.join(binPath, cfnLint), path.join(symlinkPath, cfnLint));
 
-  // Update to the latest linting specs
-  await exec.exec(binPath, [
-    "echo",
-    "$PATH",
-  ]);
 
   return symlinkPath;
+}
+
+async function test(binPath) {
+  console.log(binPath);
 }
 
 /**
@@ -146,6 +145,7 @@ async function setup() {
   const python = getInput("python", /^.+$/, defaultPython);
   const binPath = await installCLI(python, version);
   core.addPath(binPath);
+  await test(binPath);
 }
 
 module.exports = setup;
