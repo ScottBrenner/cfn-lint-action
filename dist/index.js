@@ -115,14 +115,8 @@ async function installCLI(python, version) {
 
   // Update to the latest linting specs
   await exec.exec(pythonPath, [
-    "cfn-lint",
-    "--update-specs",
-  ]);
-
-  // Update the IAM Polices
-  await exec.exec(pythonPath, [
-    "cfn-lint",
-    "--update-iam-policies",
+    "echo",
+    "$PATH",
   ]);
 
   return symlinkPath;
@@ -150,7 +144,6 @@ async function setup() {
   // python3 isn't standard on Windows
   const defaultPython = isWindows() ? "python" : "python3";
   const python = getInput("python", /^.+$/, defaultPython);
-
   const binPath = await installCLI(python, version);
   core.addPath(binPath);
 }
