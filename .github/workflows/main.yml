@@ -26,33 +26,33 @@ jobs:
     steps:
         # Step 1
       - name: Git Checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         # Step 2
       - name: Setup Cloud Formation Linter with Latest Version
-      - uses: ./
+        uses: ./
         # Step 3
       - name: Print the Cloud Formation Linter Version & run Linter.
-      - run: cfn-lint --version
-      - run: cfn-lint -t ./examples/template.yml
+        run: cfn-lint --version
+        run: cfn-lint -t ./examples/template.yml
         # Step 4
       - name: Setup Cloud Formation Linter with Specific Version
-      - uses: ./
+        uses: ./
         with:
           version: "0.44.5"
         # Step 5
       - name: Print the Cloud Formation Linter Version & run Linter.
-      - run: cfn-lint --version
-      - run: cfn-lint -t ./examples/template.yml
+        run: cfn-lint --version
+        run: cfn-lint -t ./examples/template.yml
         # Step 6
       ### Testing specifying a version and command
       - name: Testing with CFN Lint Version & Command
-      - uses: ./
+        uses: ./
         with:
           command: cfn-lint -t ./examples/template.yml
           version: "0.44.5"
         # Step 7
       ### Testing specifying a version and command
       - name: Testing with CFN Lint Command
-      - uses: ./
+        uses: ./
         with:
           command: cfn-lint -t ./examples/template.yml
