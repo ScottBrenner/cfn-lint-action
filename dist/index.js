@@ -23,173 +23,189 @@ const setup = __nccwpck_require__(391);
 /***/ 391:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
+const core = __nccwpck_require__(186);
+
+
+const { getInputs } = __nccwpck_require__(515)
+const { installCLI } = __nccwpck_require__(298)
+const { runCommand } = __nccwpck_require__(771)
+
+
+async function setup() {
+
+  let inputs; let binPath;
+
+  try {
+    inputs = await getInputs();
+  } catch (error){
+    return error;
+  }
+
+  try {
+    binPath = await installCLI(inputs);
+  } catch (error){
+    return error;
+  }
+
+  core.addPath(binPath);
+
+  if(!inputs.command){
+    return;
+  }
+
+  try {
+    await runCommand(inputs);
+  } catch (error){
+    return error;
+  }
+
+  return;
+
+}
+
+module.exports = setup;
+
+
+/***/ }),
+
+/***/ 719:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const core = __nccwpck_require__(186);
+
+module.exports = {
+  getInput: (name, pattern, defaultValue) => {
+    const value = core.getInput(name) || defaultValue;
+    if (!pattern.test(value)) {
+      throw new Error(`${name} doesn't match ${pattern}`);
+    }
+    return value;
+  },
+};
+
+
+/***/ }),
+
+/***/ 515:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const core = __nccwpck_require__(186);
+
+const { getInput } = __nccwpck_require__(719);
+const { isWindows } = __nccwpck_require__(604);
+
+module.exports = {
+  getInputs: () => {
+     // python3 isn't standard on Windows
+    const defaultPython = isWindows() ? "python" : "python3";
+
+    try {
+      const version = getInput("version", /^[\d.*]+$/, "0.*");
+      const command = getInput("command", /^cfn-lint\s || null/, null);
+      const python = getInput("python", /^.+$/, defaultPython);
+      return { version, command, python }
+    } catch(e){
+      core.error('Failed to Collect Inputs');
+      throw e;
+    }
+  },
+};
+
+
+/***/ }),
+
+/***/ 604:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
 const fs = __nccwpck_require__(747);
 const path = __nccwpck_require__(622);
 const os = __nccwpck_require__(87);
 
-const core = __nccwpck_require__(186);
 const exec = __nccwpck_require__(514);
 const io = __nccwpck_require__(436);
 
-/**
- * Returns whether the current platform is Windows.
- */
-function isWindows() {
-  return os.platform() === "win32";
-}
+module.exports = {
+  isWindows: () => {
+    return os.platform() === "win32";
+  },
+  mkdirTemp: () => {
+    return fs.mkdtempSync(path.join(os.tmpdir(), "setup-cfn-lint-"));
+  },
+  createPythonVenv: async (python, venvPath) => {
+    const pythonPath = await io.which(python, true);
 
-/**
- * Returns a new temporary directory.
- */
-function mkdirTemp() {
-  return fs.mkdtempSync(path.join(os.tmpdir(), "setup-cfn-lint-"));
-}
+    await exec.exec(pythonPath, ["--version"]);
+    await exec.exec(pythonPath, ["-m", "venv", venvPath]);
+  },
+};
 
-/**
- * Creates a Python virtual environment.
- *
- * @param {string} python - The Python interpreter to use.
- * @param {string} venvPath - The virtual environment directory.
- */
-async function createPythonVenv(python, venvPath) {
-  const pythonPath = await io.which(python, true);
 
-  await exec.exec(pythonPath, ["--version"]);
-  await exec.exec(pythonPath, ["-m", "venv", venvPath]);
-}
+/***/ }),
 
-/**
- * Installs CFN LINT CLI.
- *
- * @param {string} python - The Python interpreter to use for CFN LINT CLI.
- * @param {string} version - The CFN LINT CLI version to install.
- * @returns {Promise<string>} The directory CFN LINT CLI is installed in.
- */
-async function installCLI({ python, version }) {
-  const tempPath = mkdirTemp();
+/***/ 298:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-  // Create virtual environment
-  const venvPath = path.join(tempPath, ".venv");
-  await createPythonVenv(python, venvPath);
+const fs = __nccwpck_require__(747);
+const path = __nccwpck_require__(622);
 
-  // See https://docs.python.org/3/library/venv.html
-  const binDir = isWindows() ? "Scripts" : "bin";
-  const binPath = path.join(venvPath, binDir);
+const exec = __nccwpck_require__(514);
 
-  // Virtual environment Python
-  const pythonPath = path.join(binPath, "python");
+const { mkdirTemp, createPythonVenv, isWindows} = __nccwpck_require__(604);
 
-  // Ensure installation tooling is up-to-date across platforms
-  // setuptools and wheel needed for source and binary distributions
-  await exec.exec(pythonPath, [
-    "-m",
-    "pip",
-    "install",
-    "--upgrade",
-    "pip",
-  ]);
 
-  await exec.exec(pythonPath, [
-    "-m",
-    "pip",
-    "install",
-    "--upgrade",
-    "setuptools",
-    "wheel",
-  ]);
+module.exports = {
+  installCLI: async ({ python, version }) => {
+    const tempPath = mkdirTemp();
 
-  // Install latest compatible version
-  await exec.exec(pythonPath, [
-    "-m",
-    "pip",
-    "install",
-    "--upgrade",
-    `cfn-lint==${version}`,
-  ]);
+    // Create virtual environment
+    const venvPath = path.join(tempPath, ".venv");
+    await createPythonVenv(python, venvPath);
 
-  // Symlink from separate directory so only CFN LINT CLI is added to PATH
-  const symlinkPath = path.join(tempPath, "bin");
-  fs.mkdirSync(symlinkPath);
-  const cfnLint = isWindows() ? "cfn-lint.exe" : "cfn-lint";
-  fs.symlinkSync(path.join(binPath, cfnLint), path.join(symlinkPath, cfnLint));
+    // See https://docs.python.org/3/library/venv.html
+    const binDir = isWindows() ? "Scripts" : "bin";
+    const binPath = path.join(venvPath, binDir);
 
-  return symlinkPath;
-}
+    // Virtual environment running Python
+    const pythonPath = path.join(binPath, "python");
 
-/**
- * Runs a Cloud Formation Linter Command.
- *
- * @param {string} command - The Cloud Formation Linter Command to Run
- * @throws {e} Throws if the exec command fails.
- */
-async function runCommand({ command }) {
-  try{
-    const response = await exec.exec(command)
-    core.info(`Ran command: ${command}. Response is: ${response}`);
-  } catch(e){
-    core.error(`Error running command: ${command}. Returned error is: ${e.message}`);
-    throw e;
-  }
+    // Ensure installation tooling is up-to-date across platforms
+    await exec.exec(pythonPath, ["-m", "pip", "install", "--upgrade", "pip"]);
+    // setuptools and wheel needed for source and binary distributions
+    await exec.exec(pythonPath, ["-m", "pip", "install", "--upgrade", "setuptools", "wheel" ]);
+    // Install latest compatible version
+    await exec.exec(pythonPath, ["-m", "pip", "install", "--upgrade", `cfn-lint==${version}` ]);
 
-}
+    // Symlink from separate directory so only CFN LINT CLI is added to PATH
+    const symlinkPath = path.join(tempPath, "bin");
+    fs.mkdirSync(symlinkPath);
+    const cfnLint = isWindows() ? "cfn-lint.exe" : "cfn-lint";
+    fs.symlinkSync(path.join(binPath, cfnLint), path.join(symlinkPath, cfnLint));
 
-/**
- * Gets an input value.
- *
- * @param {string} name - The input value name.
- * @param {RegExp} pattern - The input value pattern.
- * @param {string} defaultValue - The default value if the input value is empty.
- * @returns {string} The input value.
- * @throws {Error} Throws if the input value doesn't match `pattern`.
- */
-function getInput(name, pattern, defaultValue) {
-  const value = core.getInput(name) || defaultValue;
-  if (!pattern.test(value)) {
-    throw new Error(`${name} doesn't match ${pattern}`);
-  }
-  return value;
-}
+    return symlinkPath;
+  },
 
-/**
- * Collects all the input values and returns them as an object.
- *
- * @returns {object} Returns Object of Inputs.
- * @throws {e} Throws if any of the inputs fail to collect.
- */
-function getInputs(){
-  const defaultPython = isWindows() ? "python" : "python3"; // python3 isn't standard on Windows
+};
 
-  try {
-    const version = getInput("version", /^[\d.*]+$/, "0.*");
-    const command = getInput("command", /^cfn-lint\s || null/, null);
-    const python = getInput("python", /^.+$/, defaultPython);
-    return { version, command, python }
-  } catch(e){
-    core.error('Failed to Collect Inputs');
-    throw e;
-  }
 
-}
+/***/ }),
 
-async function setup() {
-  try {
-    const inputs = await getInputs();
-    core.info(`inputs found: ${inputs}`)
-    const binPath = await installCLI(inputs);
-    core.info(`setting binPath: ${binPath}`)
-    core.addPath(binPath);
-    if(inputs.command) {
-      core.info('Command Found within Inputs');
-      await runCommand(inputs);
+/***/ 771:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const exec = __nccwpck_require__(514);
+const core = __nccwpck_require__(186);
+
+module.exports = {
+  runCommand: async ({ command }) => {
+    try{
+      const response = await exec.exec(command)
+      core.info(`Ran command: ${command}. Response is: ${response}`);
+    } catch(e){
+      core.error(`Error running command: ${command}. Returned error is: ${e.message}`);
+      throw e;
     }
-    return { success: true }
-  } catch(e){
-    core.error('Failed to run within setup');
-    throw e;
-  }
-}
-
-module.exports = setup;
+  },
+};
 
 
 /***/ }),

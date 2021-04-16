@@ -29,6 +29,7 @@ jobs:
       ### Testing pulling latest version.
       - uses: ./
       - run: cfn-lint --version
+      - run: cfn-lint -t ./examples/template.yml
 
       ### Testing specifying a version
       - uses: ./
@@ -37,7 +38,14 @@ jobs:
       - run: cfn-lint --version
 
       ### Testing specifying a version and command
+      - name: Testing with CFN Lint Version & Command
       - uses: ./
         with:
           command: cfn-lint -t ./examples/template.yml
-      - run: cfn-lint --version
+          version: "0.44.5"
+
+      ### Testing specifying a version and command
+      - name: Testing with CFN Lint Command
+      - uses: ./
+        with:
+          command: cfn-lint -t ./examples/template.yml
