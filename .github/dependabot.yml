@@ -12,7 +12,7 @@ updates:
       interval: "weekly"
 
   # Enable version updates for Docker
-  - package-ecosystem: "docker"
+  - package-ecosystem: "npm"
     # Look for a `Dockerfile` in the `root` directory
     directory: "/"
     # Check for updates once a week
