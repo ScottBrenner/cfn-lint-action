@@ -25,11 +25,9 @@ const setup = __nccwpck_require__(391);
 
 const core = __nccwpck_require__(186);
 
-
 const { getInputs } = __nccwpck_require__(515)
 const { installCLI } = __nccwpck_require__(298)
 const { runCommand } = __nccwpck_require__(771)
-
 
 async function setup() {
 
