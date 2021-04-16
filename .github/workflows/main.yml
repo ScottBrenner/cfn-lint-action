@@ -26,6 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      ### Testing pulling latest version.
       - uses: ./
       - run: cfn-lint --version
 
@@ -36,7 +37,7 @@ jobs:
       - run: cfn-lint --version
 
       ### Testing specifying a version and command
-      - name: Testing GitHub Action Pulling Specific Version of CFN Lint CLI & Runnng Command.
       - uses: ./
         with:
           command: cfn-lint -t ./examples/template.yml
+      - run: cfn-lint --version
