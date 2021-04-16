@@ -65,7 +65,7 @@ async function createPythonVenv(python, venvPath) {
  * @param {string} version - The CFN LINT CLI version to install.
  * @returns {Promise<string>} The directory CFN LINT CLI is installed in.
  */
-async function installCLI(python, version) {
+async function installCLI({ python, version }) {
   const tempPath = mkdirTemp();
 
   // Create virtual environment
@@ -113,12 +113,23 @@ async function installCLI(python, version) {
   const cfnLint = isWindows() ? "cfn-lint.exe" : "cfn-lint";
   fs.symlinkSync(path.join(binPath, cfnLint), path.join(symlinkPath, cfnLint));
 
-
   return symlinkPath;
 }
 
-async function test() {
-  await exec.exec('cfn-lint --version')
+/**
+ * Runs a Cloud Formation Linter Command.
+ *
+ * @param {string} command - The Cloud Formation Linter Command to Run
+ * @throws {e} Throws if the exec command fails.
+ */
+async function runCommand(command) {
+  try{
+    await exec.exec(command)
+  } catch(e){
+    core.error(`Error running command: ${command}. Returned error is: ${e.message}`);
+    throw e;
+  }
+
 }
 
 /**
@@ -138,14 +149,38 @@ function getInput(name, pattern, defaultValue) {
   return value;
 }
 
+/**
+ * Collects all the input values and returns them as an object.
+ *
+ * @returns {object} Returns Object of Inputs.
+ * @throws {e} Throws if any of the inputs fail to collect.
+ */
+function getInputs(){
+  const defaultPython = isWindows() ? "python" : "python3"; // python3 isn't standard on Windows
+
+  try {
+    const version = getInput("version", /^[\d.*]+$/, "0.*");
+    const command = getInput("command", /^cfn-lint\s/, null);
+    const python = getInput("python", /^.+$/, defaultPython);
+    return { version, command, python }
+  } catch(e){
+    core.error('Failed to Collect Inputs');
+    throw e;
+  }
+
+}
+
 async function setup() {
-  const version = getInput("version", /^[\d.*]+$/, "0.*");
-  // python3 isn't standard on Windows
-  const defaultPython = isWindows() ? "python" : "python3";
-  const python = getInput("python", /^.+$/, defaultPython);
-  const binPath = await installCLI(python, version);
-  core.addPath(binPath);
-  await test(binPath);
+  try {
+    const inputs = await getInputs();
+    const binPath = await installCLI(inputs);
+    core.addPath(binPath);
+    if(inputs.command) { await runCommand(); }
+    return { success: true }
+  } catch(e){
+    core.error('Failed to run within setup');
+    throw e;
+  }
 }
 
 module.exports = setup;
