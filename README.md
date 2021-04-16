@@ -26,7 +26,7 @@ jobs:
 
     - name: Setup Cloud Formation Linter with Latest Version
       uses: scottbrenner/cfn-lint-action@v2
-      # Step 3
+
     - name: Print the Cloud Formation Linter Version & run Linter.
       run: |
         cfn-lint --version
