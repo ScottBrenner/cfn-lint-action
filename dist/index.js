@@ -122,10 +122,10 @@ async function installCLI({ python, version }) {
  * @param {string} command - The Cloud Formation Linter Command to Run
  * @throws {e} Throws if the exec command fails.
  */
-async function runCommand(command) {
+async function runCommand({ command }) {
   try{
-    const exec = await exec.exec(command)
-    core.info(`Ran command: ${command}. Response is: ${exec}`);
+    const response = await exec.exec(command)
+    core.info(`Ran command: ${command}. Response is: ${response}`);
   } catch(e){
     core.error(`Error running command: ${command}. Returned error is: ${e.message}`);
     throw e;
@@ -180,7 +180,7 @@ async function setup() {
     core.addPath(binPath);
     if(inputs.command) {
       core.info('Command Found within Inputs');
-      await runCommand();
+      await runCommand(inputs);
     }
     return { success: true }
   } catch(e){
