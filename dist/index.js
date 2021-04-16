@@ -124,7 +124,8 @@ async function installCLI({ python, version }) {
  */
 async function runCommand(command) {
   try{
-    await exec.exec(command)
+    const exec = await exec.exec(command)
+    core.info(`Ran command: ${command}. Response is: ${exec}`);
   } catch(e){
     core.error(`Error running command: ${command}. Returned error is: ${e.message}`);
     throw e;
@@ -173,9 +174,14 @@ function getInputs(){
 async function setup() {
   try {
     const inputs = await getInputs();
+    core.info(`inputs found: ${inputs}`)
     const binPath = await installCLI(inputs);
+    core.info(`setting binPath: ${binPath}`)
     core.addPath(binPath);
-    if(inputs.command) { await runCommand(); }
+    if(inputs.command) {
+      core.info('Command Found within Inputs');
+      await runCommand();
+    }
     return { success: true }
   } catch(e){
     core.error('Failed to run within setup');
