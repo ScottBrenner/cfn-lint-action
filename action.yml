@@ -5,10 +5,13 @@ branding:
   color: "orange"
 inputs:
   version:
-    description: "The AWS CFN LINT version to install"
+    description: "The version of the AWS Cloud Formation Linter you would like to install"
     required: false
   python:
     description: "The Python interpreter to use for AWS CFN LINT"
+    required: false
+  command:
+    description: "The command you would like AWS Cloud Formation Linter to Run"
     required: false
 runs:
   using: "node12"

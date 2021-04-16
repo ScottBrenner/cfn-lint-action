@@ -26,12 +26,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      ### Testing specifying a version.
+      ### Testing pulling latest version.
+      - uses: ./
+      - run: cfn-lint --version
+
+      ### Testing specifying a version
       - uses: ./
         with:
           version: "0.44.5"
       - run: cfn-lint --version
 
-      ### Testing pulling latest version.
+      ### Testing specifying a version and command
       - uses: ./
+        with:
+          command: cfn-lint -t ./examples/template.yml
       - run: cfn-lint --version
