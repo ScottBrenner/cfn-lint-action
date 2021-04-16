@@ -31,7 +31,6 @@ describe('helpers Test', () => {
     jest.spyOn(os, "platform").mockReturnValue('linux');
     const res = await mkdirTemp();
     expect(res).toMatch(/setup-cfn-lint-/);
-    expect(res).toMatch("/var/folders/ls/");
   });
 
   it('Ensures Exec & IO which get called', async () => {
