@@ -36,13 +36,15 @@ async function setup() {
   try {
     inputs = await getInputs();
   } catch (error){
-    return error;
+    core.error(error.message)
+    throw error;
   }
 
   try {
     binPath = await installCLI(inputs);
   } catch (error){
-    return error;
+    core.error(error.message)
+    throw error;
   }
 
   core.addPath(binPath);
@@ -54,7 +56,8 @@ async function setup() {
   try {
     await runCommand(inputs);
   } catch (error){
-    return error;
+    core.error(error.message)
+    throw error;
   }
 
   return;
@@ -198,6 +201,7 @@ module.exports = {
     try{
       const response = await exec.exec(command)
       core.info(`Ran command: ${command}. Response is: ${response}`);
+      return response;
     } catch(e){
       core.error(`Error running command: ${command}. Returned error is: ${e.message}`);
       throw e;

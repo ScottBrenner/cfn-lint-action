@@ -5,7 +5,7 @@
   "description": "Action to setup Cloud Formation to the the PATH",
   "main": "index.js",
   "scripts": {
-    "test": "jest && eslint . && prettier --check .",
+    "test": "jest --coverage --verbose && eslint . && prettier --check .",
     "build": "ncc build index.js --out dist --license licenses.txt",
     "format": "prettier --write .",
     "all": "npm run format && npm test && npm run build"

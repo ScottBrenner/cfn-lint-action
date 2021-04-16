@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1618570653272" clover="3.2.0">
+  <project timestamp="1618570653272" name="All files">
+    <metrics statements="78" coveredstatements="74" conditionals="12" coveredconditionals="12" methods="8" coveredmethods="8" elements="98" coveredelements="94" complexity="0" loc="78" ncloc="78" packages="2" files="6" classes="6"/>
+    <package name="lib">
+      <metrics statements="21" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="setup.js" path="/Users/nicholasliffen/Documents/code/cfn-lint-action/lib/setup.js">
+        <metrics statements="21" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
+        <line num="27" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="lib.utils">
+      <metrics statements="57" coveredstatements="57" conditionals="10" coveredconditionals="10" methods="7" coveredmethods="7"/>
+      <file name="getInput.js" path="/Users/nicholasliffen/Documents/code/cfn-lint-action/lib/utils/getInput.js">
+        <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="20" type="stmt"/>
+      </file>
+      <file name="getInputs.js" path="/Users/nicholasliffen/Documents/code/cfn-lint-action/lib/utils/getInputs.js">
+        <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="9" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="8" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+      </file>
+      <file name="helpers.js" path="/Users/nicholasliffen/Documents/code/cfn-lint-action/lib/utils/helpers.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="23" type="stmt"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="16" count="7" type="stmt"/>
+        <line num="18" count="7" type="stmt"/>
+        <line num="19" count="7" type="stmt"/>
+      </file>
+      <file name="installCLI.js" path="/Users/nicholasliffen/Documents/code/cfn-lint-action/lib/utils/installCLI.js">
+        <metrics statements="19" coveredstatements="19" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="6" type="stmt"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="18" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="29" count="6" type="stmt"/>
+        <line num="32" count="6" type="stmt"/>
+        <line num="33" count="6" type="stmt"/>
+        <line num="34" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="6" type="stmt"/>
+        <line num="37" count="6" type="stmt"/>
+      </file>
+      <file name="runCommand.js" path="/Users/nicholasliffen/Documents/code/cfn-lint-action/lib/utils/runCommand.js">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
