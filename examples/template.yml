@@ -20,7 +20,7 @@ Outputs:
         - Arn
     Export:
       Name:
-        Fn::Sub: LambdaRole
+        Fn::Sub: LambdaRole-${EnvName}
   LambdaFunctionName:
     Value:
       Ref: LambdaFunction
@@ -38,7 +38,7 @@ Resources:
     Type: AWS::IAM::Role
     Properties:
       RoleName:
-        Fn::Sub: lambda-role
+        Fn::Sub: lambda-role-${EnvName}
       AssumeRolePolicyDocument:
         Statement:
           - Action:
@@ -65,7 +65,7 @@ Resources:
         ZipFile:
           "exports.handler = function(event, context){\n
             var sample = sample;"
-      Handler: ${LambdaHandlerPath}
+      Handler: !Ref LambdaHandlerPath
       MemorySize: 128
       Timeout: 10
       Role:
