@@ -1,3 +1,4 @@
+# https://github.com/awslabs/aws-cloudformation-templates/blob/master/community/services/Lambda/LambdaSample.yaml
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Template for Lambda Sample.
 Parameters:
