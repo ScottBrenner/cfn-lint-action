@@ -11,9 +11,8 @@ updates:
     schedule:
       interval: "weekly"
 
-  # Enable version updates for Docker
+  # Enable version updates for npm
   - package-ecosystem: "npm"
-    # Look for a `Dockerfile` in the `root` directory
     directory: "/"
     # Check for updates once a week
     schedule:

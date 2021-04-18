@@ -59,7 +59,7 @@ Further, you can configure this action to download a specific version of the [Cl
 
 | Input Name | Input Description                                  | Default Value                                             | Required? |
 | ---------- | -------------------------------------------------- | --------------------------------------------------------- | --------- |
-| version    | The Lilly JWT                                      | Latest Version of CFN PyPi Package                        | false     |
+| version    | Version of CFN PyPi Package                                      | Latest Version of CFN PyPi Package                        | false     |
 | python     | Python Version                                     | Defaults to `python` on Windows, and `python3` otherwise. | false     |
 | command    | Cloud Formation Linter Command to Run Afer Install | N/A                                                       | false     |
 
