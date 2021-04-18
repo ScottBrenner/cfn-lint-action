@@ -25,43 +25,42 @@ const setup = __nccwpck_require__(391);
 
 const core = __nccwpck_require__(186);
 
-const { getInputs } = __nccwpck_require__(515)
-const { installCLI } = __nccwpck_require__(298)
-const { runCommand } = __nccwpck_require__(771)
+const { getInputs } = __nccwpck_require__(515);
+const { installCLI } = __nccwpck_require__(298);
+const { runCommand } = __nccwpck_require__(771);
 
 async function setup() {
-
-  let inputs; let binPath;
+  let inputs;
+  let binPath;
 
   try {
     inputs = await getInputs();
-  } catch (error){
-    core.error(error.message)
+  } catch (error) {
+    core.error(error.message);
     throw error;
   }
 
   try {
     binPath = await installCLI(inputs);
-  } catch (error){
-    core.error(error.message)
+  } catch (error) {
+    core.error(error.message);
     throw error;
   }
 
   core.addPath(binPath);
 
-  if(!inputs.command){
+  if (!inputs.command) {
     return;
   }
 
   try {
     await runCommand(inputs);
-  } catch (error){
-    core.error(error.message)
+  } catch (error) {
+    core.error(error.message);
     throw error;
   }
 
   return;
-
 }
 
 module.exports = setup;
@@ -97,16 +96,16 @@ const { isWindows } = __nccwpck_require__(604);
 
 module.exports = {
   getInputs: () => {
-     // python3 isn't standard on Windows
+    // python3 isn't standard on Windows
     const defaultPython = isWindows() ? "python" : "python3";
 
     try {
       const version = getInput("version", /^[\d.*]+$/, "0.*");
       const command = getInput("command", /^cfn-lint\s || null/, null);
       const python = getInput("python", /^.+$/, defaultPython);
-      return { version, command, python }
-    } catch(e){
-      core.error('Failed to Collect Inputs');
+      return { version, command, python };
+    } catch (e) {
+      core.error("Failed to Collect Inputs");
       throw e;
     }
   },
@@ -151,8 +150,7 @@ const path = __nccwpck_require__(622);
 
 const exec = __nccwpck_require__(514);
 
-const { mkdirTemp, createPythonVenv, isWindows} = __nccwpck_require__(604);
-
+const { mkdirTemp, createPythonVenv, isWindows } = __nccwpck_require__(604);
 
 module.exports = {
   installCLI: async ({ python, version }) => {
@@ -172,19 +170,34 @@ module.exports = {
     // Ensure installation tooling is up-to-date across platforms
     await exec.exec(pythonPath, ["-m", "pip", "install", "--upgrade", "pip"]);
     // setuptools and wheel needed for source and binary distributions
-    await exec.exec(pythonPath, ["-m", "pip", "install", "--upgrade", "setuptools", "wheel" ]);
+    await exec.exec(pythonPath, [
+      "-m",
+      "pip",
+      "install",
+      "--upgrade",
+      "setuptools",
+      "wheel",
+    ]);
     // Install latest compatible version
-    await exec.exec(pythonPath, ["-m", "pip", "install", "--upgrade", `cfn-lint==${version}` ]);
+    await exec.exec(pythonPath, [
+      "-m",
+      "pip",
+      "install",
+      "--upgrade",
+      `cfn-lint==${version}`,
+    ]);
 
     // Symlink from separate directory so only CFN LINT CLI is added to PATH
     const symlinkPath = path.join(tempPath, "bin");
     fs.mkdirSync(symlinkPath);
     const cfnLint = isWindows() ? "cfn-lint.exe" : "cfn-lint";
-    fs.symlinkSync(path.join(binPath, cfnLint), path.join(symlinkPath, cfnLint));
+    fs.symlinkSync(
+      path.join(binPath, cfnLint),
+      path.join(symlinkPath, cfnLint)
+    );
 
     return symlinkPath;
   },
-
 };
 
 
@@ -198,12 +211,14 @@ const core = __nccwpck_require__(186);
 
 module.exports = {
   runCommand: async ({ command }) => {
-    try{
-      const response = await exec.exec(command)
+    try {
+      const response = await exec.exec(command);
       core.info(`Ran command: ${command}. Response is: ${response}`);
       return response;
-    } catch(e){
-      core.error(`Error running command: ${command}. Returned error is: ${e.message}`);
+    } catch (e) {
+      core.error(
+        `Error running command: ${command}. Returned error is: ${e.message}`
+      );
       throw e;
     }
   },
