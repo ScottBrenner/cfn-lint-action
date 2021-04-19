@@ -30,6 +30,8 @@ jobs:
         # Step 1
       - name: Git Checkout
         uses: actions/checkout@v2
+        with:
+          path: "cfn-lint-action"
         # Step 2
       - name: Setup Cloud Formation Linter with Latest Version
         uses: ./

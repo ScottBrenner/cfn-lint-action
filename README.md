@@ -95,6 +95,38 @@ Below the above include the following:
 
 This should give you the same experience as before.
 
+## Running Locally
+
+This is a JavaScript GitHub Action that relies on Node for third party packages. To get this working on your local machine, firstly make sure you have a working [NodeJS](https://nodejs.org/en/) runtime. It is also recommended to use [Act](https://github.com/nektos/act) to test &amp; run actions locally. These instructions assume you have the [GitHub CLI](https://cli.github.com/) installed.
+
+1. Firstly, [fork](https://cli.github.com/manual/gh_repo_fork) the repository by running:
+
+```
+gh repo fork ScottBrenner/cfn-lint-action
+```
+
+2. Install dependencies
+
+```
+npm install
+```
+
+3. To run the action locally run the following command
+
+```
+node index.js
+```
+
+## Contributing
+
+This product welcomes contributions the any open source community. Firstly, please raise an issue on the repository, as this will be used to discuss/agree on scope and feature/bug detail. Once agreed, please follow the [Running Locally](#running-locally) steps above to get started on your machine. Branch off `main` following logically branch naming conventions `feature/***` or `bug/***`. When contributing please try and meet these development principles:
+
+- This software product follows a module architecture, please try and stay consistent to making small, reusable `modules` of code within the `lib/utils` directory.
+- Ensure any new code updated the relevant unit tests found within the `tests/` directory. We use [Jest](https://jestjs.io/) for testing.
+- Make sure you run `npm run all` before you push any changes to GitHub to ensure all tests, linting and building passes.
+
+Once you are happy with the changes, please propose a pull request on the repository and the repository maintainers will review as soon as possible.
+
 ## License
 
 Please see the [LICENSE](https://github.com/ScottBrenner/cfn-lint-action/blob/master/LICENSE).
