@@ -1,9 +1,18 @@
-name: 'cfn-lint-action'
-author: 'Scott Brenner <scott@scottbrenner.me>'
-description: 'GitHub Action for CloudFormation Linter'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
+name: "Setup AWS CFN LINT"
+description: "Setup AWS CFN LINT and add it to the PATH"
 branding:
-  icon: 'box'
-  color: 'yellow'
+  icon: "terminal"
+  color: "orange"
+inputs:
+  version:
+    description: "The version of the AWS CloudFormation Linter you would like to install"
+    required: false
+  python:
+    description: "The Python interpreter to use for AWS CFN LINT"
+    required: false
+  command:
+    description: "The command you would like AWS CloudFormation Linter to Run"
+    required: false
+runs:
+  using: "node12"
+  main: "dist/index.js"
