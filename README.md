@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Testing with CFN Lint Command
-        uses: ./
+        uses: scottbrenner/cfn-lint-action@v2
         with:
           command: cfn-lint -t ./template.yml
 ```
