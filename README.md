@@ -2,7 +2,7 @@
 
 This Action for [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) enables arbitrary actions for interacting with CloudFormation Linter to validate CloudFormation yaml/json templates against the CloudFormation spec and additional checks. Includes checking valid values for resource properties and best practices.
 
-The actions primary purpose is to set the [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) to the runners $PATH so you can access the linter throughout the workflow, and use in a way that suits your application. There is a way to run a [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) command in this workflow though if you like.
+The Action's primary purpose is to set the [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) to the runner's $PATH so you can access the linter throughout the workflow, and use in a way that suits your application. There is a way to run a [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) command in this workflow though if you like.
 
 ## Usage
 
