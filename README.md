@@ -65,7 +65,7 @@ Further, you can configure this action to download a specific version of the [Cl
 
 This GitHub Action does not directly output any values.
 
-## How to use the Cloud Formation Linter?
+## How to use the CloudFormation Linter?
 
 See [Cloud Formation Linter Usage](https://github.com/aws-cloudformation/cfn-python-lint#basic-usage) for full usage details.
 
