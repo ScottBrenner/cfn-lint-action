@@ -71,7 +71,7 @@ See [Cloud Formation Linter Usage](https://github.com/aws-cloudformation/cfn-pyt
 
 ## Upgrading from Version 1?
 
-The main difference between Version 1 and Version 2 is the fact Version 2 by default doesn't run any linting commands. The primary purpose of this action is now to provide the underlying [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) package and enable you to run your commands. To do this, follow the steps below:
+The main difference between Version 1 and Version 2 is the fact Version 2 by default doesn't run any linting commands. The primary purpose of this action is now to provide the underlying [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) package and enable you to run your commands. To upgrade from Version 1 to Version 2, follow the steps below:
 
 #### Step One
 
