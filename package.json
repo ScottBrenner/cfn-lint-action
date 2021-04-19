@@ -2,7 +2,7 @@
   "name": "setup-cfn-lint",
   "version": "0.1.0",
   "private": true,
-  "description": "Action to setup Cloud Formation to the the PATH",
+  "description": "Action to setup CloudFormation to the the PATH",
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage --verbose && eslint . && prettier --check .",
