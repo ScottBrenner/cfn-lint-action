@@ -11,7 +11,7 @@ inputs:
     description: "The Python interpreter to use for AWS CFN LINT"
     required: false
   command:
-    description: "The command you would like AWS Cloud Formation Linter to Run"
+    description: "The command you would like AWS CloudFormation Linter to Run"
     required: false
 runs:
   using: "node12"
