@@ -49,7 +49,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Testing with CFN Lint Version & Command
+      - name: Testing with CFN Lint Command
         uses: ./
         with:
           command: cfn-lint -t ./template.yml
