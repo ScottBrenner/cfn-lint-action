@@ -34,7 +34,7 @@ jobs:
 
 Within the `run |` section, you specify the required Cloud Formation Linter commands.
 
-However, if you would rather run the Cloud CloudFormation Linter commands within this action. That is also possible. An example of that can be found below:
+However, if you would rather run the CloudFormation Linter commands within this action. That is also possible. An example of that can be found below:
 
 ```yaml
 name: Lint CloudFormation Templates
