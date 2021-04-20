@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Cloud Formation Linter [Problem Matchers](https://github.com/actions/toolkit/blob/main/docs/problem-matchers.md).
+- Cloud FormationLinter [Problem Matchers](https://github.com/actions/toolkit/blob/main/docs/problem-matchers.md).
 - Pre-Commit Hook for running `npm run all` to ensure the software is automatically re-built on changes.
 
 ### Changed
