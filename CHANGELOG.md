@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Metadata cleanup within `package.json` to better align with software.
 
+## [2.0.1](https://github.com/ScottBrenner/cfn-lint-action/releases/tag/v2.0.1)
+
+### Changed
+
+- Bump @vercel/ncc from 0.27.0 to 0.28.3
+
 ## [2.0.0](https://github.com/ScottBrenner/cfn-lint-action/releases/tag/v2.0.0)
 
 ### Added
