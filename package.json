@@ -1,6 +1,6 @@
 {
-  "name": "setup-cfn-lint",
-  "version": "0.1.0",
+  "name": "cfn-lint-action",
+  "version": "2.1.0",
   "private": true,
   "description": "Action to setup CloudFormation to the the PATH",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "all": "npm run format && npm test && npm run build",
     "prepare": "husky install"
   },
-  "license": "Apache-2.0",
+  "license": "MIT License",
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",

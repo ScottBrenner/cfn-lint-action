@@ -3,7 +3,8 @@ on:
   push:
     branches:
       - main
-      - ft/2.0.0
+      - feature/**
+      - bug/**
   pull_request:
 jobs:
   unit:

@@ -4,6 +4,10 @@ This Action for [CloudFormation Linter](https://github.com/aws-cloudformation/cf
 
 The Action's primary purpose is to set the [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) to the runner's $PATH so you can access the linter throughout the workflow, and use in a way that suits your application. There is a way to run a [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) command in this workflow though if you like.
 
+On a pull request, once this GitHub Action is set-up, it may look something like this:
+
+![Output of Cloud Formation Linter](.github/cfn-lint-pull-request.png?raw=true "Output of Cloud Formation Linter")
+
 ## Usage
 
 There are multiple ways to consume this GitHub Action.
