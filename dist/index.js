@@ -6,12 +6,15 @@ module.exports =
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const core = __nccwpck_require__(186);
+const path = __nccwpck_require__(622);
 
 const setup = __nccwpck_require__(391);
 
 (async () => {
   try {
     await setup();
+    const matchersPath = path.join(__dirname, "..", ".github");
+    core.info(`##[add-matcher]${path.join(matchersPath, "cfn-lint.json")}`);
   } catch (error) {
     core.setFailed(error.message);
   }
