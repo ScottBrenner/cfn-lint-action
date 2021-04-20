@@ -1,5 +1,5 @@
-name: "Setup AWS CFN LINT"
-description: "Setup AWS CFN LINT and add it to the PATH"
+name: "cfn-lint-action"
+description: "Setup Amazon Cloud Formation Linter (cfn-lint)"
 branding:
   icon: "terminal"
   color: "orange"

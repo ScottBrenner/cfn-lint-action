@@ -1,5 +1,5 @@
 {
-  "name": "setup-cfn-lint",
+  "name": "cfn-lint-action",
   "version": "2.1.0",
   "private": true,
   "description": "Action to setup CloudFormation to the the PATH",
