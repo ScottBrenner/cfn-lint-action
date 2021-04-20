@@ -1,63 +1,82 @@
-name: "Tests"
+name: CI
+
 on:
   push:
-    branches:
-      - main
-      - ft/2.0.0
-  pull_request:
+    branches:    
+      - master         # Push events on master branch
+  pull_request:        # Run tests for any PRs
+
+env:
+  IMAGE_NAME: cfn-lint-action
+
 jobs:
-  unit:
-    name: npm test
+  # Run tests.
+  test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - run: npm ci
-      - run: npm test
-  integ:
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - ubuntu-18.04
-          - ubuntu-20.04
-          - windows-2016
-          - windows-2019
-          - macos-10.15
-    name: ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+
+      - name: Docker build
+        run: docker build . --file Dockerfile --tag image
+
+      - name: Docker run
+        run: docker run --entrypoint cfn-lint image -v
+
+  lint:
+    # Name the Job
+    name: Lint Code Base
+    # Set the agent to run on
+    runs-on: ubuntu-latest
+
+    ##################
+    # Load all steps #
+    ##################
     steps:
-        # Step 1
-      - name: Git Checkout
+      ##########################
+      # Checkout the code base #
+      ##########################
+      - name: Checkout Code
         uses: actions/checkout@v2
-        # Step 2
-      - name: Setup Cloud Formation Linter with Latest Version
-        uses: ./
-        # Step 3
-      - name: Print the Cloud Formation Linter Version & run Linter.
+
+      ################################
+      # Run Linter against code base #
+      ################################
+      - name: Lint Code Base
+        uses: docker://github/super-linter:v2.2.0
+        env:
+          VALIDATE_ALL_CODEBASE: true
+
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+    # Ensure test job passes before pushing image.
+    needs: test
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+
+      - name: Log into GitHub Container Registry
+        run: echo "${{ secrets.CFN_CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push image to GitHub Container Registry
         run: |
-          cfn-lint --version
-          cfn-lint -t ./examples/template.yml
-        # Step 4
-      - name: Setup Cloud Formation Linter with Specific Version
-        uses: ./
-        with:
-          version: "0.44.5"
-        # Step 5
-      - name: Print the Cloud Formation Linter Version & run Linter.
-        run: |
-          cfn-lint --version
-          cfn-lint -t ./examples/template.yml
-        # Step 6
-      ### Testing specifying a version and command
-      - name: Testing with CFN Lint Version & Command
-        uses: ./
-        with:
-          command: cfn-lint -t ./examples/template.yml
-          version: "0.44.5"
-        # Step 7
-      ### Testing specifying a version and command
-      - name: Testing with CFN Lint Command
-        uses: ./
-        with:
-          command: cfn-lint -t ./examples/template.yml
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          SHA="${{ github.sha }}"
+          # Strip git ref prefix from version
+          REF=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          echo IMAGE_ID=$IMAGE_ID
+          echo SHA=$SHA
+          echo REF=$REF
+          docker tag $IMAGE_NAME $IMAGE_ID:$SHA
+          docker tag $IMAGE_NAME $IMAGE_ID:$REF
+          docker push $IMAGE_ID:$SHA
+          docker push $IMAGE_ID:$REF

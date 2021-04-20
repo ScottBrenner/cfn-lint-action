@@ -1,0 +1,8 @@
+# ignore all files by default
+*
+# include required files with an exception
+!cfn-lint.json
+!entrypoint.sh
+!LICENSE
+!README.md
+!THIRD_PARTY_NOTICE.md
