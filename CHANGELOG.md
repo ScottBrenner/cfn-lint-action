@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0](https://github.com/ScottBrenner/cfn-lint-action/releases/tag/v2.1.0)
+
+### Added
+
+- Cloud Formation Linter [Problem Matchers](https://github.com/actions/toolkit/blob/main/docs/problem-matchers.md).
+- Pre-Commit Hook for running `npm run all` to ensure the software is automatically re-built on changes.
+
+### Changed
+
+- Metadata cleanup within `package.json` to better align with software.
+
 ## [2.0.0](https://github.com/ScottBrenner/cfn-lint-action/releases/tag/v2.0.0)
 
 ### Added
