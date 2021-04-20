@@ -1,5 +1,5 @@
 name: "cfn-lint-action"
-description: "Setup Amazon Cloud Formation Linter (cfn-lint)"
+description: "Setup Amazon CloudFormation Linter (cfn-lint)"
 branding:
   icon: "terminal"
   color: "orange"
