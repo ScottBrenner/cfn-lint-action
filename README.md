@@ -135,4 +135,4 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribut
 
 ## License
 
-Please see the [LICENSE](https://github.com/ScottBrenner/cfn-lint-action/blob/master/LICENSE).
+Please see the [LICENSE](LICENSE).
