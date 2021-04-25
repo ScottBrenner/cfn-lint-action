@@ -104,6 +104,7 @@ This should give you the same experience as before.
 This is a JavaScript GitHub Action that relies on Node for third party packages, and can be developed locally or in GitHub Codespaces.
 
 ### Running Locally
+
 To get this working on your local machine, firstly make sure you have a working [NodeJS](https://nodejs.org/en/) runtime. It is also recommended to use [Act](https://github.com/nektos/act) to test & run actions locally. These instructions assume you have the [GitHub CLI](https://cli.github.com/) installed.
 
 1. Firstly, [fork](https://cli.github.com/manual/gh_repo_fork) the repository by running:
