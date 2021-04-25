@@ -23,10 +23,10 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**GitHub Actions Runner configuration (please complete the following information):**
+ - OS: [e.g. `ubuntu-20.04`]
+ - Inputs: [e.g. `command`]
+ - Version: [e.g. `v2.1.0`]
 
 **Additional context**
 Add any other context about the problem here.
