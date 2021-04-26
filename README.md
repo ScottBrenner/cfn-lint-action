@@ -99,9 +99,13 @@ Below the above include the following:
 
 This should give you the same experience as before.
 
-## Running Locally
+## Development
 
-This is a JavaScript GitHub Action that relies on Node for third party packages. To get this working on your local machine, firstly make sure you have a working [NodeJS](https://nodejs.org/en/) runtime. It is also recommended to use [Act](https://github.com/nektos/act) to test & run actions locally. These instructions assume you have the [GitHub CLI](https://cli.github.com/) installed.
+This is a JavaScript GitHub Action that relies on Node for third party packages, and can be developed locally or in GitHub Codespaces.
+
+### Running Locally
+
+To get this working on your local machine, firstly make sure you have a working [NodeJS](https://nodejs.org/en/) runtime. It is also recommended to use [Act](https://github.com/nektos/act) to test & run actions locally. These instructions assume you have the [GitHub CLI](https://cli.github.com/) installed.
 
 1. Firstly, [fork](https://cli.github.com/manual/gh_repo_fork) the repository by running:
 
@@ -121,9 +125,13 @@ npm install
 node index.js
 ```
 
+### GitHub Codespaces
+
+If you’re in [the Codespaces beta](https://github.com/features/codespaces/signup), you’ll see a “Code” button in the Code tab of this repository. The default codespace configuration automatically installs and configures all dependencies necessary for development of this project.
+
 ## Contributing
 
-This product welcomes contributions from the open source community. Firstly, please raise an issue on the repository, as this will be used to discuss/agree on scope and feature/bug detail. Once agreed, please follow the [Running Locally](#running-locally) steps above to get started on your machine. Branch off `main` following logically branch naming conventions `feature/***` or `bug/***`. When contributing please try and meet these development principles:
+This product welcomes contributions from the open source community. Firstly, please raise an issue on the repository, as this will be used to discuss/agree on scope and feature/bug detail. Once agreed, please follow the [Development](#development) steps above to get started on your machine. Branch off `main` following logically branch naming conventions `feature/***` or `bug/***`. When contributing please try and meet these development principles:
 
 - This software product follows a module architecture, please try and stay consistent to making small, reusable `modules` of code within the `lib/utils` directory.
 - Ensure any new code updated the relevant unit tests found within the `tests/` directory. We use [Jest](https://jestjs.io/) for testing.
