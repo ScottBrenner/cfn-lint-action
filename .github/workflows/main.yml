@@ -1,11 +1,6 @@
 name: "Tests"
-on:
-  push:
-    branches:
-      - main
-      - feature/**
-      - bug/**
-  pull_request:
+on: [push]
+
 jobs:
   unit:
     name: npm test
