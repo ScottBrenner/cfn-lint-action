@@ -3,6 +3,7 @@ name: "CodeQL"
 on:
   push:
     branches: [ main, v* ]
+    branches-ignore: dependabot/**
   pull_request:
     branches: [ main, v* ]
   schedule:
