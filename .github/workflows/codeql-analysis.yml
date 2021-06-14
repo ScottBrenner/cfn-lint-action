@@ -10,6 +10,12 @@ jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
+    
+    permissions:
+      actions: write
+      contents: read
+      pull-requests: read
+      security-events: write
 
     strategy:
       fail-fast: false
