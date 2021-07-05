@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@vercel/ncc": "^0.28.6",
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
     "husky": "^7.0.0",
     "jest": "^27.0.5",
     "lint-staged": "^11.0.0",
