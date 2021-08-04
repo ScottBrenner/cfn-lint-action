@@ -65,7 +65,7 @@ Further, you can configure this action to download a specific version of the [Cl
 | ---------- | -------------------------------------------------- | --------------------------------------------------------- | --------- |
 | version    | Version of CFN PyPi Package                        | Latest Version of CFN PyPi Package                        | false     |
 | python     | Python Version                                     | Defaults to `python` on Windows, and `python3` otherwise. | false     |
-| command    | Cloud Formation Linter Command to Run Afer Install | N/A                                                       | false     |
+| command    | Cloud Formation Linter Command to Run After Install| N/A                                                       | false     |
 
 This GitHub Action does not directly output any values.
 
