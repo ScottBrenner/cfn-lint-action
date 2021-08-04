@@ -61,11 +61,11 @@ jobs:
 
 Further, you can configure this action to download a specific version of the [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/), as well as the Python interpreter. See the table below for all the `INPUTS` this action can take.
 
-| Input Name | Input Description                                  | Default Value                                             | Required? |
-| ---------- | -------------------------------------------------- | --------------------------------------------------------- | --------- |
-| version    | Version of CFN PyPi Package                        | Latest Version of CFN PyPi Package                        | false     |
-| python     | Python Version                                     | Defaults to `python` on Windows, and `python3` otherwise. | false     |
-| command    | Cloud Formation Linter Command to Run After Install| N/A                                                       | false     |
+| Input Name | Input Description                                   | Default Value                                             | Required? |
+| ---------- | --------------------------------------------------- | --------------------------------------------------------- | --------- |
+| version    | Version of CFN PyPi Package                         | Latest Version of CFN PyPi Package                        | false     |
+| python     | Python Version                                      | Defaults to `python` on Windows, and `python3` otherwise. | false     |
+| command    | Cloud Formation Linter Command to Run After Install | N/A                                                       | false     |
 
 This GitHub Action does not directly output any values.
 
