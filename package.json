@@ -13,7 +13,7 @@
   },
   "license": "MIT License",
   "dependencies": {
-    "@actions/core": "^1.4.0",
+    "@actions/core": "^1.5.0",
     "@actions/exec": "^1.1.0",
     "@actions/io": "^1.1.1"
   },
