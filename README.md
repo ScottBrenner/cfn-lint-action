@@ -93,6 +93,7 @@ Below the above include the following:
 ```
 - name: Print the Cloud Formation Linter Version & run Linter.
   run: |
+    setopt -s globstar # enable globbing
     cfn-lint --version
     cfn-lint -t ./**/*.yaml
 ```
