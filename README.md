@@ -88,7 +88,7 @@ Change the action in your Workflow to be:
 
 #### Step Two
 
-Below the above include the following:
+[If you are linting multiple files, you must enable globbing](https://github.com/aws-cloudformation/cfn-lint#basic-usage):
 
 ```
 - name: Print the Cloud Formation Linter Version & run Linter.
@@ -96,6 +96,15 @@ Below the above include the following:
     setopt -s globstar # enable globbing
     cfn-lint --version
     cfn-lint -t ./**/*.yaml
+```
+
+However, if you are not linting multiple files, you can simply do:
+
+```
+- name: Print the Cloud Formation Linter Version & run Linter.
+  run: |
+    cfn-lint --version
+    cfn-lint -t ./template.yaml
 ```
 
 This should give you the same experience as before.
