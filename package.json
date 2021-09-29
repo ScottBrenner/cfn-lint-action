@@ -18,12 +18,12 @@
     "@actions/io": "^1.1.1"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.29.2",
+    "@vercel/ncc": "^0.31.1",
     "eslint": "^7.32.0",
-    "husky": "^7.0.1",
-    "jest": "^27.0.6",
+    "husky": "^7.0.2",
+    "jest": "^27.2.2",
     "lint-staged": "^11.1.2",
-    "prettier": "2.3.2"
+    "prettier": "2.4.1"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
