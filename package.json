@@ -19,10 +19,10 @@
   },
   "devDependencies": {
     "@vercel/ncc": "^0.33.3",
-    "eslint": "^8.9.0",
+    "eslint": "^8.10.0",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
-    "lint-staged": "^12.3.4",
+    "lint-staged": "^12.3.5",
     "prettier": "2.5.1"
   },
   "lint-staged": {
