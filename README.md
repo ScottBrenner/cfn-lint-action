@@ -93,7 +93,7 @@ Change the action in your Workflow to be:
 ```
 - name: Print the Cloud Formation Linter Version & run Linter.
   run: |
-    setopt -s globstar # enable globbing
+    shopt -s globstar # enable globbing
     cfn-lint --version
     cfn-lint -t ./**/*.yaml
 ```
