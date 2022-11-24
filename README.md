@@ -136,6 +136,7 @@ node index.js
 ```
 
 ### GitHub Codespaces
+
 The default Codespace configuration automatically installs and configures all dependencies necessary for development of this project.
 
 ## Contributing
