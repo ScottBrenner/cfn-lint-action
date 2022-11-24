@@ -136,8 +136,7 @@ node index.js
 ```
 
 ### GitHub Codespaces
-
-If you’re in [the Codespaces beta](https://github.com/features/codespaces/signup), you’ll see a “Code” button in the Code tab of this repository. The default codespace configuration automatically installs and configures all dependencies necessary for development of this project.
+The default Codespace configuration automatically installs and configures all dependencies necessary for development of this project.
 
 ## Contributing
 
