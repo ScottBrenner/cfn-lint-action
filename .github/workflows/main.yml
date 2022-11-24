@@ -39,7 +39,7 @@ jobs:
       - name: Setup Cloud Formation Linter with Specific Version
         uses: ./
         with:
-          version: "0.71.1"
+          version: "0.72.0"
         # Step 5
       - name: Print the Cloud Formation Linter Version & run Linter.
         run: |
@@ -51,7 +51,6 @@ jobs:
         uses: ./
         with:
           command: cfn-lint -t ./examples/template.yml
-          version: "0.71.1"
         # Step 7
       ### Testing specifying a version and command
       - name: Testing with CFN Lint Command
