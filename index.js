@@ -5,9 +5,9 @@ const setup = require("./lib/setup");
 
 (async () => {
   try {
-    await setup();
     const matchersPath = path.join(__dirname, "..", ".github");
     core.info(`##[add-matcher]${path.join(matchersPath, "cfn-lint.json")}`);
+    await setup();
   } catch (error) {
     core.setFailed(error.message);
   }
