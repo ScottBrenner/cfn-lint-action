@@ -22,7 +22,7 @@ describe("runCommand Test", () => {
   it("Successfully handles failure CFN-Lint Command", async () => {
     const command = { command: "cfn-lint -t ./template.yml" };
     const expectedReturnValue = new Error(
-      "You have Errors in your Cloud Formation"
+      "You have Errors in your Cloud Formation",
     );
 
     jest.spyOn(exec, "exec").mockImplementation(() => {
@@ -35,7 +35,7 @@ describe("runCommand Test", () => {
       await runCommand(command);
     } catch (e) {
       expect(e.message).toStrictEqual(
-        "You have Errors in your Cloud Formation"
+        "You have Errors in your Cloud Formation",
       );
       expect(log).toHaveBeenCalledTimes(1);
     }

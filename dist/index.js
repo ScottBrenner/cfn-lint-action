@@ -174,7 +174,7 @@ module.exports = {
     const cfnLint = isWindows() ? "cfn-lint.exe" : "cfn-lint";
     fs.symlinkSync(
       path.join(binPath, cfnLint),
-      path.join(symlinkPath, cfnLint)
+      path.join(symlinkPath, cfnLint),
     );
 
     return symlinkPath;
@@ -198,7 +198,7 @@ module.exports = {
       return response;
     } catch (e) {
       core.error(
-        `Error running command: ${command}. Returned error is: ${e.message}`
+        `Error running command: ${command}. Returned error is: ${e.message}`,
       );
       throw e;
     }
