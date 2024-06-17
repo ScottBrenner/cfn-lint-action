@@ -19,8 +19,8 @@ jobs:
           - ubuntu-22.04
           - windows-2019
           - windows-2022
-          - macos-11
-          - macos-12
+          - macos-13
+          - macos-14
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     steps:
