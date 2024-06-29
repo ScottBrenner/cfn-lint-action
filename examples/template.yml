@@ -46,8 +46,8 @@ Resources:
           - LAMBDA_FUNCTION_PUBLIC_ACCESS_PROHIBITED
     Properties:
       FunctionName: !Sub lambda-function-${EnvName}
-      Description: LambdaFunction using python3.12.
-      Runtime: python3.12
+      Description: LambdaFunction using python3.9.
+      Runtime: python3.9
       Code:
         ZipFile: |
           import json
