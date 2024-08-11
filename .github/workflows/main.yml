@@ -51,9 +51,3 @@ jobs:
         uses: ./
         with:
           command: cfn-lint -t ./examples/template.yml
-        # Step 7
-      ### Testing specifying a version and command
-      - name: Testing with CFN Lint Command
-        uses: ./
-        with:
-          command: cfn-lint -t ./examples/template.yml
