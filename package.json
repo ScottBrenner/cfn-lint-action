@@ -9,7 +9,7 @@
     "build": "ncc build index.js --out dist --license licenses.txt",
     "format": "prettier --write .",
     "all": "npm run format && npm test && npm run build",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "license": "MIT License",
   "dependencies": {
