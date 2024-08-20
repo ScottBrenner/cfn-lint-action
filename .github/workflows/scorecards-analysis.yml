@@ -1,13 +1,13 @@
 name: Scorecards supply-chain security
 on:
-  # Only the default branch is supported.
-  branch_protection_rule:
-  schedule:
-    - cron: '16 15 * * 4'
   push:
-    branches: [ "main" ]
+    # Only the default branch is supported.
+    branches:
+    - main
+  schedule:
+    # Weekly on Saturdays.
+    - cron:  '30 1 * * 6'
 
-# Declare default permissions as read only.
 permissions: read-all
 
 jobs:
@@ -15,48 +15,46 @@ jobs:
     name: Scorecards analysis
     runs-on: ubuntu-latest
     permissions:
-      # Needed to upload the results to code-scanning dashboard.
+      # Needed for Code scanning upload
       security-events: write
-      # Used to receive a badge.
+      # Needed for GitHub OIDC token if publish_results is true
       id-token: write
-      # Needs for private repositories.
-      contents: read
-      actions: read
-    
+
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v4
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           persist-credentials: false
 
       - name: "Run analysis"
-        uses: ossf/scorecard-action@62b2cac7ed8198b15735ed49ab1e5cf35480ba46 # tag=v2.4.0
+        uses: ossf/scorecard-action@62b2cac7ed8198b15735ed49ab1e5cf35480ba46 # v2.4.0
         with:
           results_file: results.sarif
           results_format: sarif
-          # (Optional) Read-only PAT token. Uncomment the `repo_token` line below if:
-          # - you want to enable the Branch-Protection check on a *public* repository, or
-          # - you are installing Scorecards on a *private* repository
+          # (Optional) Read-only PAT token if
+          # - you want to enable the Branch-Protection check on a *public* repository
           # To create the PAT, follow the steps in https://github.com/ossf/scorecard-action#authentication-with-pat.
           repo_token: ${{ secrets.SCORECARD_READ_TOKEN }}
-
-          # Publish the results for public repositories to enable scorecard badges. For more details, see
-          # https://github.com/ossf/scorecard-action#publishing-results. 
-          # For private repositories, `publish_results` will automatically be set to `false`, regardless 
-          # of the value entered here.
+          # Scorecard team runs a weekly scan of public GitHub repos,
+          # see https://github.com/ossf/scorecard#public-data.
+          # Setting `publish_results: true` helps us scale by leveraging your workflow to
+          # extract the results instead of relying on our own infrastructure to run scans.
+          # And it's free for you!
           publish_results: true
 
-      # Upload the results as artifacts (optional). Commenting out will disable uploads of run results in SARIF
-      # format to the repository Actions tab.
+      # Upload the results as artifacts (optional). Commenting out will disable
+      # uploads of run results in SARIF format to the repository Actions tab.
+      # https://docs.github.com/en/actions/advanced-guides/storing-workflow-data-as-artifacts
       - name: "Upload artifact"
-        uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # tag=v4.3.6
+        uses: actions/upload-artifact@834a144ee995460fba8ed112a2fc961b36a5ec5a # v4.3.6
         with:
           name: SARIF file
           path: results.sarif
           retention-days: 5
-      
-      # Upload the results to GitHub's code scanning dashboard.
+
+      # Upload the results to GitHub's code scanning dashboard (optional).
+      # Commenting out will disable upload of results to your repo's Code Scanning dashboard
       - name: "Upload to code-scanning"
-        uses: github/codeql-action/upload-sarif@v3.26.2
+        uses: github/codeql-action/upload-sarif@eb055d739abdc2e8de2e5f4ba1a8b246daa779aa # v3.26.0
         with:
           sarif_file: results.sarif
