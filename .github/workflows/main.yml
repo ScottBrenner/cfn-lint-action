@@ -39,7 +39,7 @@ jobs:
       - name: Setup Cloud Formation Linter with Specific Version
         uses: ./
         with:
-          version: "[sarif]>=1.*"
+          version: "[sarif]>=1.0"
         # Step 5
       - name: Print the Cloud Formation Linter Version & run Linter.
         run: |
