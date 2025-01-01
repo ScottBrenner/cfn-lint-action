@@ -18,32 +18,32 @@ test.each([
   {
     platform: "linux",
     input: {},
-    expected: { version: "0.*", python: "python3" },
+    expected: { version: "[full]==1.*", python: "python3" },
   },
   {
     platform: "darwin",
     input: {},
-    expected: { version: "0.*", python: "python3" },
+    expected: { version: "[full]==1.*", python: "python3" },
   },
   {
     platform: "win32",
     input: {},
-    expected: { version: "0.*", python: "python" },
+    expected: { version: "[full]==1.*", python: "python" },
   },
   {
     platform: "linux",
-    input: { version: "0.44.4" },
-    expected: { version: "0.44.4", python: "python3" },
+    input: { version: "[full]>=0.44.4" },
+    expected: { version: "[full]>=0.44.4", python: "python3" },
   },
   {
     platform: "linux",
     input: { python: "python3" },
-    expected: { version: "0.*", python: "python3" },
+    expected: { version: "[full]==1.*", python: "python3" },
   },
   {
     platform: "linux",
-    input: { version: "0.44.4", python: "python3" },
-    expected: { version: "0.44.4", python: "python3" },
+    input: { version: "[full]~=0.44.4", python: "python3" },
+    expected: { version: "[full]~=0.44.4", python: "python3" },
   },
 ])("setup %o", async (test) => {
   jest.spyOn(os, "platform").mockReturnValue(test.platform);
@@ -58,20 +58,17 @@ test.each([
   expect(io.which).toHaveBeenCalledWith(test.expected.python, true);
   expect(exec.exec).toHaveBeenCalledWith(
     expect.anything(),
-    expect.arrayContaining([
-      "install",
-      `cfn-lint[full]==${test.expected.version}`,
-    ]),
+    expect.arrayContaining(["install", `cfn-lint${test.expected.version}`]),
   );
   expect(core.addPath).toHaveBeenCalledTimes(1);
 });
 
 test.each([
   {
-    version: "not valid",
+    version: " ",
   },
   {
-    version: "not|valid",
+    version: "  ",
   },
 ])("invalid input %o", async (input) => {
   core.getInput = jest
