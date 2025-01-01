@@ -81,7 +81,7 @@ module.exports = {
     const defaultPython = isWindows() ? "python" : "python3";
 
     try {
-      const version = getInput("version", /^.+$/, "[full]==1.*");
+      const version = getInput("version", /[a-zA-Z0-9]+/, "[full]==1.*");
       const command = getInput("command", /^cfn-lint\s || null/, null);
       const python = getInput("python", /^.+$/, defaultPython);
       return { version, command, python };

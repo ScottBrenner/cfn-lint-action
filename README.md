@@ -85,7 +85,7 @@ jobs:
       - name: Testing with CFN Lint Command
         uses: scottbrenner/cfn-lint-action@v2
         with:
-          version: [sarif]>=1.*
+          version: "[sarif]>=1.*"
           command: cfn-lint -t ./template.yml
 ```
 
