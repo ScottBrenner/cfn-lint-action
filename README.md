@@ -61,11 +61,33 @@ jobs:
 
 Further, you can configure this action to download a specific version of the [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/), as well as the Python interpreter. See the table below for all the `INPUTS` this action can take.
 
-| Input Name | Input Description                                   | Default Value                                             | Required? |
-| ---------- | --------------------------------------------------- | --------------------------------------------------------- | --------- |
-| version    | Version of CFN PyPi Package                         | Latest Version of CFN PyPi Package                        | false     |
-| python     | Python Version                                      | Defaults to `python` on Windows, and `python3` otherwise. | false     |
-| command    | Cloud Formation Linter Command to Run After Install | N/A                                                       | false     |
+| Input Name | Input Description                                   | Default Value                                                         | Required? |
+| ---------- | --------------------------------------------------- | --------------------------------------------------------------------- | --------- |
+| version    | Version of CFN PyPi Package                         | Latest Version of CFN PyPi Package with all the optional dependencies | false     |
+| python     | Python Version                                      | Defaults to `python` on Windows, and `python3` otherwise.             | false     |
+| command    | Cloud Formation Linter Command to Run After Install | N/A                                                                   | false     |
+
+[Optional dependencies](https://github.com/aws-cloudformation/cfn-lint?tab=readme-ov-file#optional-dependencies) and [version specifier](https://peps.python.org/pep-0440/#version-specifiers) can be input as follows:
+
+```yaml
+name: Lint CloudFormation Templates
+
+on: [push]
+
+jobs:
+  cloudformation-linter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Testing with CFN Lint Command
+        uses: scottbrenner/cfn-lint-action@v2
+        with:
+          version: "[sarif]>=1.0"
+          command: cfn-lint -t ./template.yml
+```
 
 This GitHub Action does not directly output any values.
 
