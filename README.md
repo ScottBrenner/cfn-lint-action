@@ -67,7 +67,7 @@ Further, you can configure this action to download a specific version of the [Cl
 | python     | Python Version                                      | Defaults to `python` on Windows, and `python3` otherwise.             | false     |
 | command    | Cloud Formation Linter Command to Run After Install | N/A                                                                   | false     |
 
-[Optional dependencies](https://github.com/aws-cloudformation/cfn-lint?tab=readme-ov-file#optional-dependencies) and [version specifier](https://peps.python.org/pep-0440/#version-specifiers) can be input as follows:
+From v2.4.8 onwards, [optional dependencies](https://github.com/aws-cloudformation/cfn-lint?tab=readme-ov-file#optional-dependencies) and [version specifier](https://peps.python.org/pep-0440/#version-specifiers) can be input as below. If a version is provided as input it must include a specifier as well e.g. `"==1.24.0"`.
 
 ```yaml
 name: Lint CloudFormation Templates

@@ -5,7 +5,7 @@ branding:
   color: "orange"
 inputs:
   version:
-    description: "The version of the AWS CloudFormation Linter you would like to install, along with optional dependencies and specifier"
+    description: "The version of the AWS CloudFormation Linter you would like to install, along with optional dependencies and specifier. From v2.4.8 onwards, if a version is provided as input it must include a specifier as well e.g. '==1.24.0'"
     required: false
   python:
     description: "The Python interpreter to use for AWS CFN LINT"
