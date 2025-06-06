@@ -1,4 +1,5 @@
 # GitHub Action for CloudFormation Linter
+
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/ScottBrenner/cfn-lint-action/badge)](https://scorecard.dev/viewer/?uri=github.com/ScottBrenner/cfn-lint-action)
 
 This Action for [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/) enables arbitrary actions for interacting with CloudFormation Linter to validate CloudFormation yaml/json templates against the CloudFormation spec and additional checks. Includes checking valid values for resource properties and best practices.
