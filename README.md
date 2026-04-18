@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Cloud Formation Linter with Latest Version
-        uses: scottbrenner/cfn-lint-action@v2
+        uses: scottbrenner/cfn-lint-action@v2.7.0
 
       - name: Print the Cloud Formation Linter Version & run Linter.
         run: |
@@ -56,20 +56,20 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Testing with CFN Lint Command
-        uses: scottbrenner/cfn-lint-action@v2
+        uses: scottbrenner/cfn-lint-action@v2.7.0
         with:
           command: cfn-lint -t ./template.yml
 ```
 
 Further, you can configure this action to download a specific version of the [CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint/), as well as the Python interpreter. See the table below for all the `INPUTS` this action can take.
 
-| Input Name | Input Description                                   | Default Value                                                         | Required? |
-| ---------- | --------------------------------------------------- | --------------------------------------------------------------------- | --------- |
-| version    | Version of CFN PyPi Package                         | Latest Version of CFN PyPi Package with all the optional dependencies | false     |
-| python     | Python Version                                      | Defaults to `python` on Windows, and `python3` otherwise.             | false     |
-| command    | Cloud Formation Linter Command to Run After Install | N/A                                                                   | false     |
+| Input Name | Input Description                                                                  | Default Value                                                         | Required? |
+| ---------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------- |
+| version    | Version of CFN PyPi Package; supports optional dependencies and version specifiers | Latest Version of CFN PyPi Package with all the optional dependencies | false     |
+| python     | Python Version                                                                     | Defaults to `python` on Windows, and `python3` otherwise.             | false     |
+| command    | Cloud Formation Linter Command to Run After Install                                | N/A                                                                   | false     |
 
-From v2.4.8 onwards, [optional dependencies](https://github.com/aws-cloudformation/cfn-lint?tab=readme-ov-file#optional-dependencies) and [version specifier](https://peps.python.org/pep-0440/#version-specifiers) can be input as below. If a version is provided as input it must include a specifier as well e.g. `"==1.24.0"`.
+From v2.4.8 onwards, [optional dependencies](https://github.com/aws-cloudformation/cfn-lint?tab=readme-ov-file#optional-dependencies) and [version specifier](https://peps.python.org/pep-0440/#version-specifiers) can be input as below. You can also specify a bare version such as `1.24.0`.
 
 ```yaml
 name: Lint CloudFormation Templates
@@ -82,12 +82,34 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Testing with CFN Lint Command
-        uses: scottbrenner/cfn-lint-action@v2
+        uses: scottbrenner/cfn-lint-action@v2.7.0
         with:
           version: "[sarif]>=1.0"
+          command: cfn-lint -t ./template.yml
+```
+
+You can also specify a plain version without extras or specifiers:
+
+```yaml
+name: Lint CloudFormation Templates
+
+on: [push]
+
+jobs:
+  cloudformation-linter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Testing with CFN Lint Command
+        uses: scottbrenner/cfn-lint-action@v2.7.0
+        with:
+          version: "1.24.0"
           command: cfn-lint -t ./template.yml
 ```
 
@@ -107,7 +129,7 @@ Change the action in your Workflow to be:
 
 ```
 - name: Setup Cloud Formation Linter with Latest Version
-  uses: scottbrenner/cfn-lint-action@v2
+  uses: scottbrenner/cfn-lint-action@v2.7.0
 ```
 
 #### Step Two

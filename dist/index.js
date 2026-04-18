@@ -81,7 +81,11 @@ module.exports = {
     const defaultPython = isWindows() ? "python" : "python3";
 
     try {
-      const version = getInput("version", /[a-zA-Z0-9]+/, "[full]==1.*");
+      const version = getInput(
+        "version",
+        /^(?:[A-Za-z0-9.*]+|(?:\[[A-Za-z0-9_,]+\])?\s*(?:==|!=|<=|>=|~=|===|<|>)\s*[A-Za-z0-9.*]+)$/,
+        "[full]==1.*",
+      );
       const command = getInput("command", /^cfn-lint\s || null/, null);
       const python = getInput("python", /^.+$/, defaultPython);
       return { version, command, python };
@@ -159,13 +163,18 @@ module.exports = {
       "setuptools",
       "wheel",
     ]);
+    const normalizedVersion = version.replace(/\s+/g, "");
+    const installTarget = /^[A-Za-z0-9.*]+$/.test(normalizedVersion)
+      ? `cfn-lint[full]==${normalizedVersion}`
+      : `cfn-lint${normalizedVersion}`;
+
     // Install latest compatible version
     await exec.exec(pythonPath, [
       "-m",
       "pip",
       "install",
       "--upgrade",
-      `cfn-lint${version}`,
+      installTarget,
     ]);
 
     // Symlink from separate directory so only CFN LINT CLI is added to PATH
