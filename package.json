@@ -18,7 +18,7 @@
     "@actions/io": "^2.0.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.38.3",
+    "@vercel/ncc": "^0.44.0",
     "eslint": "^10.4.1",
     "husky": "^9.1.7",
     "jest": "^30.4.2",
