@@ -13,6 +13,9 @@ inputs:
   command:
     description: "The command you would like AWS CloudFormation Linter to Run"
     required: false
+outputs:
+  cfn_lint_venv:
+    description: "The path to the virtual environment where CloudFormation Linter is installed"
 runs:
   using: "node24"
   main: "dist/index.js"

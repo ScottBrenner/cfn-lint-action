@@ -94,6 +94,10 @@ test.each([
     expect.arrayContaining(["install", test.expected.install]),
   );
   expect(core.addPath).toHaveBeenCalledTimes(1);
+  expect(core.setOutput).toHaveBeenCalledWith(
+    "cfn_lint_venv",
+    expect.any(String),
+  );
 });
 
 test.each([
