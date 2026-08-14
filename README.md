@@ -69,6 +69,28 @@ Further, you can configure this action to download a specific version of the [Cl
 | python     | Python Version                                                                     | Defaults to `python` on Windows, and `python3` otherwise.             | false     |
 | command    | Cloud Formation Linter Command to Run After Install                                | N/A                                                                   | false     |
 
+## Installing additional plugins
+
+If you need to install additional plugins (e.g., `cfn-lint-serverless`), you can use the `cfn_lint_venv` output provided by this action. Because the action installs `cfn-lint` into a temporary virtual environment, standard `pip install` commands in subsequent steps won't install plugins to the correct environment.
+
+Here is how you can install additional plugins using the virtual environment path:
+
+```yaml
+- name: Setup Cloud Formation Linter with Latest Version
+  id: cfn-lint
+  uses: scottbrenner/cfn-lint-action@v2
+
+- name: Install plugins
+  run: ${{ steps.cfn-lint.outputs.cfn_lint_venv }}/bin/python -m pip install cfn-lint-serverless
+
+- name: Print the Cloud Formation Linter Version & run Linter.
+  run: |
+    cfn-lint --version
+    cfn-lint -t ./template.yml
+```
+
+_(Note: On Windows runners, use `${{ steps.cfn-lint.outputs.cfn_lint_venv }}/Scripts/python` instead of `bin`)_
+
 From v2.4.8 onwards, [optional dependencies](https://github.com/aws-cloudformation/cfn-lint?tab=readme-ov-file#optional-dependencies) and [version specifier](https://peps.python.org/pep-0440/#version-specifiers) can be input as below. You can also specify a bare version such as `1.24.0`.
 
 ```yaml
