@@ -22,7 +22,7 @@
     "eslint": "^10.10.0",
     "husky": "^9.1.7",
     "jest": "^30.5.1",
-    "lint-staged": "^17.4.1",
+    "lint-staged": "^17.5.1",
     "prettier": "3.9.6"
   },
   "overrides": {
