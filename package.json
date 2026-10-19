@@ -23,7 +23,7 @@
     "husky": "^9.1.7",
     "jest": "^30.5.2",
     "lint-staged": "^17.6.0",
-    "prettier": "3.9.9"
+    "prettier": "3.9.10"
   },
   "overrides": {
     "glob": ">=13.0.6",
